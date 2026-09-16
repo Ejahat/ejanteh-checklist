@@ -8,7 +8,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://آدرس-فرانت-ورکل-خودت.vercel.app",
+      "https://ejanteh-checklist-frontend.vercel.app",
     ],
   })
 );
@@ -16,9 +16,16 @@ app.use(
 app.use(express.json());
 
 app.get("/api/health", (_req, res) => {
-  res.json({ ok: true, service: "checklist-backend" });
+  res.json({
+    ok: true,
+    service: "checklist-backend",
+  });
 });
 
 app.use("/api/checklist", checklistRouter);
 
-export default app;
+const PORT = Number(process.env.PORT) || 4000;
+
+app.listen(PORT, () => {
+  console.log(`Checklist API running on port ${PORT}`);
+});
